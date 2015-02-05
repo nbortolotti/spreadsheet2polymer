@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <script src="../components/webcomponentsjs/webcomponents.js"></script>
+  <link href="../components/paper-button/paper-button.html" rel="import">
+    <link rel="import" href="../components/core-splitter/core-splitter.html">
+ <style>
+
+    .container {
+      height: 240px;
+      border: 4px solid #aaa;
+    }
+
+    #box1, #box3, #box5, #box6 {
+      width: 100px;
+    }
+
+    #box2, #box4 {
+      height: 40px;
+    }
+
+  </style>
+</head>
+<body>
+    <paper-button>
+      <a href="javascript:history.back(1)" >Back</a>
+    </paper-button>
+
+  <div class="container" horizontal layout>
+    <div>Before (min: 128px)</div>
+    <core-splitter direction="left" minSize="128px"></core-splitter>
+    <div flex>After
+    #variable 1
+    #variable 2
+    #variable 3
+    </div>
+  </div>
+</body>
+</html>

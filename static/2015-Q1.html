@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+  <title>2015 - Q1</title>
+
+  <script src="components/webcomponentsjs/webcomponents.js"></script>
+    <link href="components/core-animated-pages/core-animated-pages.html" rel="import">
+    <link href="components/core-collapse/core-collapse.html" rel="import">
+    <link rel="import" href="components/sheet/google-sheets.html">
+    <link href="components/chart-elements/chart-elements.html" rel="import">
+    <link rel="import" href="components/core-scroll-header-panel/core-scroll-header-panel.html">
+    <link rel="import" href="nick-collapse-viewer.html">
+
+  <style>
+    body {
+      font-family: 'Roboto 2', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      margin: 0;
+      background: #f1f1f1;
+    }
+
+    .green {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 250px;
+      background: #E6E6E6;
+    }
+
+    .heading {
+      padding: 10px 15px;
+      background-color: #f3f3f3;
+      border: 1px solid #dedede;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+    }
+
+    .content {
+      padding: 15px;
+      border: 1px solid #dedede;
+      border-top: none;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+  </style>
+</head>
+<body fullbleed layout vertical>
+
+<google-sheets id="sheet" key="1V1n23_iWtllPit-xP8iEbXcqJSGDhRGu43Pk5H3cTPw" gid="0" published></google-sheets>
+
+<core-scroll-header-panel flex>
+<section>
+  <template id="rows" bind>
+      <template repeat="{{rows}}">
+        <nick-collapse-viewer program="{{gsx$program.$t}}" details="{{gsx$details.$t}}"
+                link="{{gsx$link.$t}}" chart="{{gsx$chart.$t}}" image="{{gsx$image.$t}}" imagedetails="{{gsx$imagedetails.$t}}">
+        </nick-collapse-viewer>
+      </template>
+    </template>
+</section>
+</core-scroll-header-panel>
+
+<script>
+
+var sheet = document.querySelector('#sheet');
+
+sheet.addEventListener('google-sheet-data', function(e) {
+  switch (e.detail.type) {
+    case 'spreadsheets':
+      break;
+    case 'rows':
+      document.querySelector('#rows').model = this;
+      break;
+    default:
+      break;
+  }
+});
+
+sheet.addEventListener('core-error', function(e) {
+  alert(e.detail.response);
+});
+</script>
+</body>
